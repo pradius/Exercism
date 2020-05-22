@@ -1,9 +1,6 @@
 class RaindropConverter {
 
     String convert(int number) {
-        if ((number % 3) != 0 && (number % 5) != 0 && (number % 7) != 0) {
-            return Integer.toString(number);
-        }
         var output = new StringBuilder();
 
         if ((number % 3) == 0) {
@@ -14,6 +11,9 @@ class RaindropConverter {
         }
         if ((number % 7) == 0) {
             output.append("Plong");
+        }
+        if (output.toString().isEmpty()) {
+            return Integer.toString(number);
         }
         return output.toString();
     }
