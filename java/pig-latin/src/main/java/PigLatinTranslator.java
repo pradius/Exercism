@@ -15,25 +15,19 @@ class PigLatinTranslator {
         for (var s : words) {
             var str = new StringBuffer(s);
 
-            if (vowels.contains(s.charAt(0)) || s.substring(0, 2).equals("xr") || s.substring(0, 2).equals("yt")) {
+            if (vowels.contains(s.charAt(0)) || s.startsWith("xr") || s.startsWith("yt")) {
                 phrase.append(s.concat("ay"));
             } else if (s.charAt(1) == 'y' || s.charAt(2) == 'y') {
                 if (s.length() == 2) {
-                    str.deleteCharAt(s.indexOf('y'));
-                    str.insert(0, 'y');
-                    str.append("ay");
+                    str.deleteCharAt(s.indexOf('y')).insert(0, 'y').append("ay");
                 }else {
-                    str.delete(0, s.indexOf('y') + 1);
-                    str.insert(0, 'y');
-                    str.append(s.substring(0, s.indexOf('y')) + "ay");
+                    str.delete(0, s.indexOf('y') + 1).insert(0, 'y').append(s.substring(0, s.indexOf('y')) + "ay");
                 }
-                phrase.append(str.toString());
+                phrase.append(str);
 
             } else if (s.contains("qu")) {
-                str.delete(0, s.indexOf("qu") + 2);
-                str.append(s.substring(0, s.indexOf("qu") + 2));
-                str.append("ay");
-                phrase.append(str.toString());
+                str.delete(0, s.indexOf("qu") + 2).append(s.substring(0, s.indexOf("qu") + 2) + "ay");
+                phrase.append(str);
 
             } else {
                 int index = 0;
@@ -43,14 +37,11 @@ class PigLatinTranslator {
                     }
                     index++;
                 }
-                str.delete(0, index);
-                str.append(s.substring(0, index));
-                str.append("ay");
-                phrase.append(str.toString());
+                str.delete(0, index).append(s.substring(0, index) + "ay");
+                phrase.append(str);
             }
             pos++;
             if (words.length > 1 && words.length != pos ){phrase.append(" ");}
-
         }
         return phrase.toString();
     }
